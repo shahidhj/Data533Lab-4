@@ -1,0 +1,9 @@
+[
+  "test_Teacher.py::MyTeacherTest::testDepartments",
+  "test_Teacher.py::MyTeacherTest::testResearchAreas",
+  "test_Teacher.py::MyTeacherTest::test_BasicInfo",
+  "test_Teacher.py::MyTeacherTest::test_display",
+  "test_Teacher.py::MyTeacherTest::test_roles",
+  "test_Teacher.py::MyTeacherTest::test_subjects",
+  "test_Teacher.py::MyTeacherTest::test_subscriptionFees"
+]
