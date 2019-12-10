@@ -7,6 +7,10 @@ class NonIntegerError(Exception):
     def __init__(self, usr_input):
         print("Error info:", usr_input, "is not a valid entry.")
 
+class IncorrectDataTypeError(Exception):
+    def __init__(self, usr_input):
+        print("Error info:", usr_input, "has data type:", end = " ")
+        print(type(usr_input).__name__)
 
 class Lit_detail:
     def __init__(self, lit_name, lit_author):
@@ -33,9 +37,13 @@ class Book(Lit_detail):
                 self.year = book_year
                 Book.unique_count += 1
                 Book.total_count += book_copies
+            elif type(book_copies) != int:
+                raise(IncorrectDataTypeError(book_copies))
             else:
                 raise(NonIntegerError(book_copies))
-        except:
+        except IncorrectDataTypeError:
+            print("Enter an integer value for book copies.")
+        except NonIntegerError:
             print("Enter a positive integer number for book copies.")
                 
     def issued(self):
@@ -93,9 +101,13 @@ class Periodical(Lit_detail):
                 self.edition = periodical_edition
                 Periodical.unique_count += 1
                 Periodical.total_count += periodical_copies
+            elif type(periodical_copies) != int:
+                raise(IncorrectDataTypeError(periodical_copies))
             else:
                 raise(NonIntegerError(periodical_copies))
-        except:
+        except IncorrectDataTypeError:
+            print("Enter an integer value for periodical copies.")
+        except NonIntegerError:
             print("Enter a positive integer number for periodical copies.")
         
     def issued(self):
