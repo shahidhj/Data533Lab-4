@@ -1,2 +1,2 @@
-# Data533Lab-4
-Lab4 with CI CD
+Travis CI Build Status:  
+[![Build Status](https://travis-ci.com/shahidhj/Data533Lab-4.svg?branch=master)](https://travis-ci.com/shahidhj/Data533Lab-4)
