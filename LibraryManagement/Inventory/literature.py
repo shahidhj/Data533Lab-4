@@ -1,3 +1,17 @@
+
+class StatusUpdateError(Exception):
+    def __init__(self, status):
+        print("Error info:", status, "is not a valid status. Enter either Yes, No or Discontinued")
+
+class NonIntegerError(Exception):
+    def __init__(self, usr_input):
+        print("Error info:", usr_input, "is not a valid entry.")
+
+class IncorrectDataTypeError(Exception):
+    def __init__(self, usr_input):
+        print("Error info:", usr_input, "has data type:", end = " ")
+        print(type(usr_input).__name__)
+
 class Lit_detail:
     def __init__(self, lit_name, lit_author):
         self.title = lit_name
@@ -11,17 +25,27 @@ class Book(Lit_detail):
     total_count = 0
     
     def __init__(self, book_name, book_author, book_genre, book_price, book_pages, book_code, book_year, book_copies):
-        Lit_detail.__init__(self, book_name, book_author)
-        self.genre = book_genre
-        self.price = book_price
-        self.pages = book_pages
-        self.availability = "Yes"
-        self.copies = book_copies
-        self.code = book_code
-        self.year = book_year
-        Book.unique_count += 1
-        Book.total_count += book_copies
-        
+        try:
+            if type(book_copies) == int and book_copies>0:
+                Lit_detail.__init__(self, book_name, book_author)
+                self.genre = book_genre
+                self.price = book_price
+                self.pages = book_pages
+                self.availability = "Yes"
+                self.copies = book_copies
+                self.code = book_code
+                self.year = book_year
+                Book.unique_count += 1
+                Book.total_count += book_copies
+            elif type(book_copies) != int:
+                raise(IncorrectDataTypeError(book_copies))
+            else:
+                raise(NonIntegerError(book_copies))
+        except IncorrectDataTypeError:
+            print("Enter an integer value for book copies.")
+        except NonIntegerError:
+            print("Enter a positive integer number for book copies.")
+                
     def issued(self):
         if self.availability != "Discontinued":
             if self.copies > 0:
@@ -49,10 +73,13 @@ class Book(Lit_detail):
             return "Discontinued"
         
     def update_status(self, status):
-        if status in ["Yes", "No", "Discontinued"]:
-            self.availability = status
-        else:
-            return "Enter valid status"
+        try:
+            if status in ["Yes", "No", "Discontinued"]:
+                self.availability = status
+            else:
+                raise(StatusUpdateError(status))
+        except StatusUpdateError:
+            print("Book Status Not Updated")
     
     def display_details(self):
         disply = Lit_detail.display(self)
@@ -63,15 +90,25 @@ class Periodical(Lit_detail):
     total_count = 0
     
     def __init__(self, periodical_name, periodical_author, periodical_category, periodical_price, periodical_code, periodical_edition, periodical_copies):
-        Lit_detail.__init__(self, periodical_name, periodical_author)
-        self.category = periodical_category
-        self.price = periodical_price
-        self.availability = "Yes"
-        self.copies = periodical_copies
-        self.code = periodical_code
-        self.edition = periodical_edition
-        Periodical.unique_count += 1
-        Periodical.total_count += periodical_copies
+        try:
+            if type(periodical_copies) == int and periodical_copies>0:
+                Lit_detail.__init__(self, periodical_name, periodical_author)
+                self.category = periodical_category
+                self.price = periodical_price
+                self.availability = "Yes"
+                self.copies = periodical_copies
+                self.code = periodical_code
+                self.edition = periodical_edition
+                Periodical.unique_count += 1
+                Periodical.total_count += periodical_copies
+            elif type(periodical_copies) != int:
+                raise(IncorrectDataTypeError(periodical_copies))
+            else:
+                raise(NonIntegerError(periodical_copies))
+        except IncorrectDataTypeError:
+            print("Enter an integer value for periodical copies.")
+        except NonIntegerError:
+            print("Enter a positive integer number for periodical copies.")
         
     def issued(self):
         if self.availability != "Discontinued":
@@ -99,11 +136,14 @@ class Periodical(Lit_detail):
             return "Discontinued"
 
     def update_status(self, status):
-        if status in ["Yes", "No", "Discontinued"]:
-            self.availability = status
-        else:
-            return "Enter valid status"
-        
+        try:
+            if status in ["Yes", "No", "Discontinued"]:
+                self.availability = status
+            else:
+                raise(StatusUpdateError(status))
+        except StatusUpdateError:
+            print("Periodical Status Not Updated")
+            
     def display_details(self):
         disply = Lit_detail.display(self)
         return disply + "    Category:" + str(self.category) + "    Edition:" + str(self.edition) + "    Copies Available:" + str(self.copies)
