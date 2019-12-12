@@ -9,8 +9,7 @@ class NonIntegerError(Exception):
 
 class IncorrectDataTypeError(Exception):
     def __init__(self, usr_input):
-        print("Error info:", usr_input, "has data type:", end = " ")
-        print(type(usr_input).__name__)
+        print("Error info:", usr_input, "has data type:", type(usr_input).__name__)
 
 class Lit_detail:
     def __init__(self, lit_name, lit_author):
@@ -43,8 +42,10 @@ class Book(Lit_detail):
                 raise(NonIntegerError(book_copies))
         except IncorrectDataTypeError:
             print("Enter an integer value for book copies.")
+            return None
         except NonIntegerError:
             print("Enter a positive integer number for book copies.")
+            return None
                 
     def issued(self):
         if self.availability != "Discontinued":
@@ -107,8 +108,10 @@ class Periodical(Lit_detail):
                 raise(NonIntegerError(periodical_copies))
         except IncorrectDataTypeError:
             print("Enter an integer value for periodical copies.")
+            return None
         except NonIntegerError:
             print("Enter a positive integer number for periodical copies.")
+            return None
         
     def issued(self):
         if self.availability != "Discontinued":
