@@ -1,3 +1,20 @@
+
+class InvalidInput(Exception):
+    def __init__(self, input):
+        print("Error :", input, "is not a valid input")
+        return None
+
+class UpdateStatusError(Exception):
+    def __init__(self, status):
+        print("Error", status, "Invalid options entered entered")
+        return None
+
+
+class IncorrectDataTypeError(Exception):
+    def __init__(self, input):
+        print("Error :",input, "has data type:", type(input).__name__)
+
+
 class Person:
 
     def __init__(self, name, address, phoneNo, email, gender):
@@ -27,10 +44,24 @@ class Person:
         self.__name = name
 
     def setGender(self, gender):
-        self.__gender = gender
+        try:
+            if gender in ["M","F"]:
+                self.__gender = gender
+            else:
+                raise(UpdateStatusError(gender))
+        except UpdateStatusError:
+            print("Please enter either M or F")
 
     def setPhoneNo(self, phoneNo):
-        self.__phoneNo = phoneNo
+        try:
+            if type(phoneNo) == str:
+                self.__phoneNo = str(phoneNo)
+            else:
+                raise(IncorrectDataTypeError(phoneNo))
+        except IncorrectDataTypeError:
+            print("Please enter correct phone number")
+
+
 
     def setEmail(self, email):
         self.__email = email
@@ -54,8 +85,15 @@ class Student(Person):
         self.totalAmount = 1200
 
     def paySubscriptionFees(self,fees):
-        self.amount = self.amount + fees
-        return self.amount
+        try:
+            if type(fees) == int:
+                self.amount = self.amount + fees
+                return self.amount
+            else:
+                raise(IncorrectDataTypeError(fees))
+        except IncorrectDataTypeError:
+            print("you have entered incorrect Amount in fees")
+
 
 
     def getBalance(self):
@@ -65,7 +103,14 @@ class Student(Person):
         return self.__status
 
     def updateStatus(self, status):
-        self.__status = status
+        try:
+            if status in ["Present Student", "Alumni"]:
+                self.__status = status
+            else:
+                raise(UpdateStatusError(status))
+        except UpdateStatusError:
+            print("Status Not Updated")
+
 
     def getnoDue(self):
         if self.amount == self.totalAmount:

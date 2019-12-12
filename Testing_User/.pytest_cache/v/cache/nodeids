@@ -1,7 +1,3 @@
 [
-  "test_Student.py::MyTestStudent::test_BasicInfo",
-  "test_Student.py::MyTestStudent::test_NoDue",
-  "test_Student.py::MyTestStudent::test_Status",
-  "test_Student.py::MyTestStudent::test_Subscription",
-  "test_Student.py::MyTestStudent::test_display"
+  "test_Teacher.py::MyTeacherTest::test_BasicInfo"
 ]
