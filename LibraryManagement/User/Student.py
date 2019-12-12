@@ -1,8 +1,4 @@
 
-class InvalidInput(Exception):
-    def __init__(self, input):
-        print("Error :", input, "is not a valid input")
-        return None
 
 class UpdateStatusError(Exception):
     def __init__(self, status):

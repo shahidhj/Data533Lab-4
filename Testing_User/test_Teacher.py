@@ -15,6 +15,7 @@ class MyTeacherTest(unittest.TestCase):
         self.assertEqual(self.Teacher1.getSalary(),9899)
         self.Teacher2.subscriptionFees(200)
         self.assertEqual(self.Teacher2.getSalary(),9799)
+        self.assertIsNone(self.Teacher3.subscriptionFees("asd"))
 
     def testResearchAreas(self):
         self.Teacher1.updateResearchAreas("Human computer Interaction")
@@ -65,6 +66,6 @@ class MyTeacherTest(unittest.TestCase):
 
 
     def test_display(self):
-        self.assertEqual(self.Teacher1.display(),(('Name','Khalad',  'Address','UBC Address','Email','Khald@ubc.com', 'PhoneNumber','1234567890','Gender','M'),'subjects thought',[],'Role of the prof','Assistant Professor','Department of the Prof','Computer','employee Id of the Prof','123456','Get Research Areas',[]))
+        self.assertEqual(self.Teacher1.display(),(('Name','Khalad',  'Address','UBC Address','Email','Khald@ubc.com','Gender','M', 'PhoneNumber','1234567890'),'subjects thought',[],'Role of the prof','Assistant Professor','Department of the Prof','Computer','employee Id of the Prof','123456','Get Research Areas',[]))
 
 
