@@ -1,4 +1,5 @@
 {
+  "test_Student.py::MyTestStudent::test_NoDue": true,
   "test_Student.py::MyTestStudent::test_TotalAmountPaid": true,
   "test_Student.py::MyTestStudent::test_getBalance": true
 }

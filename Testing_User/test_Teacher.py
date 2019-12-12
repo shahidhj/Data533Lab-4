@@ -8,6 +8,7 @@ class MyTeacherTest(unittest.TestCase):
     def setUp(self) -> None:
         self.Teacher1 = Teacher(name="Khalad",address="UBC Address",email="Khald@ubc.com",gender="M",phoneNo="1234567890",employeeId="123456",department="Computer",salary=9999,role="Assistant Professor")
         self.Teacher2 = Teacher(name="Apurva",address="UBC",email="Apurva@ubc.com",gender="M",phoneNo="0987654321",employeeId="654321",department="Computer",salary=9999,role="Assistant Professor")
+        self.Teacher3 = Teacher(name="Jhon", address="UBC-O", email="Jhon@ubc.com", gender="M", phoneNo="09876535344321",employeeId="676542", department="Statistics", salary=9999, role="Assistant Professor")
 
     def test_subscriptionFees(self):
         self.Teacher1.subscriptionFees(100)
@@ -57,6 +58,10 @@ class MyTeacherTest(unittest.TestCase):
         self.assertEqual(self.Teacher2.getEmail(), "Apurva@ubc.com")
         self.Teacher2.setEmail("ApurvaN@ubc.com")
         self.assertEqual(self.Teacher2.getEmail(), "ApurvaN@ubc.com")
+
+        self.assertIsNone(self.Teacher3.setPhoneNo(3423))
+        self.assertIsNone(self.Teacher3.setGender("Asdasd"))
+        self.assertIsNone(self.Teacher3.addSubjects(23464))
 
 
     def test_display(self):

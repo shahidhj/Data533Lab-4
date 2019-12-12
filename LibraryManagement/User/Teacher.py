@@ -2,16 +2,17 @@
 class InvalidInput(Exception):
     def __init__(self, input):
         print("Error :", input, "is not a valid input")
+        return None
 
 class UpdateStatusError(Exception):
     def __init__(self, status):
         print("Error", status, "Invalid options entered entered")
-
+        return None
 
 class IncorrectDataTypeError(Exception):
     def __init__(self, input):
         print("Error :",input, "has data type:", type(input).__name__)
-
+        return None
 
 class Person:
 
@@ -81,7 +82,7 @@ class Teacher(Person):
 
     def subscriptionFees(self,fees):
         try:
-            if type(fees) == float:
+            if type(fees) == int:
                 self.__salary-= fees
                 return self.__salary
             else:
@@ -89,7 +90,7 @@ class Teacher(Person):
         except IncorrectDataTypeError:
             print("you have entered incorrect Amount in fees")
 
-        
+
     def updateResearchAreas(self,research):
         self.__researchAreas.append(research)
         return self.__researchAreas
@@ -116,7 +117,14 @@ class Teacher(Person):
         return self.__subjects
 
     def addSubjects(self,subject):
-        self.__subjects.append(subject)
+        try:
+            if type(subject) == str:
+                self.__subjects.append(subject)
+            else:
+                raise(IncorrectDataTypeError(subject))
+        except IncorrectDataTypeError:
+            print("You need to enter the subject names")
+
 
     def getSalary(self):
         return self.__salary

@@ -7,6 +7,9 @@ class MyTestStudent(unittest.TestCase):
     def setUp(self) :
         self.Student1 = Student(name="Shahid", address="Springfield",studentId=123455678,phoneNo="132445",email="shahid.h@abc.com",gender="M",status="Present Student")
         self.Student2 = Student(studentId=98765432,name="Ritayu",address="Academy Hill",phoneNo="786345",email="Ritayu@ritayu.com",gender="M",status="Alumni")
+        self.Student3 = Student(name="Shahid", address="Springfield",studentId=123455678,phoneNo="123244",email="shahid.h@abc.com",gender="abc",status="Present Alumni")
+
+
 
     def test_Subscription(self):
         self.Student1.paySubscriptionFees(100)
@@ -20,6 +23,8 @@ class MyTestStudent(unittest.TestCase):
 
         self.assertEqual(self.Student1.getBalance(),800)
         self.assertEqual(self.Student2.getBalance(),600)
+        self.assertIsNone(self.Student3.paySubscriptionFees("abasd"))
+
 
     def test_Status(self):
         self.assertEqual(self.Student1.getStatus(),"Present Student")
@@ -51,6 +56,9 @@ class MyTestStudent(unittest.TestCase):
         self.Student2.setEmail("Ritayu@tiyau.ca")
         self.assertEqual(self.Student2.getEmail(),"Ritayu@tiyau.ca")
 
+        self.assertIsNone(self.Student3.setPhoneNo(3423))
+        self.assertIsNone(self.Student3.setGender("Asdasd"))
+        self.assertIsNone(self.Student3.updateStatus("xxx"))
 
     def test_NoDue(self):
         self.assertEqual(self.Student1.getnoDue(),('You need to pay pending amount for No Due certificate which is ', 1200))

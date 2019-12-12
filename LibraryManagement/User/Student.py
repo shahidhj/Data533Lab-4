@@ -2,10 +2,12 @@
 class InvalidInput(Exception):
     def __init__(self, input):
         print("Error :", input, "is not a valid input")
+        return None
 
 class UpdateStatusError(Exception):
     def __init__(self, status):
         print("Error", status, "Invalid options entered entered")
+        return None
 
 
 class IncorrectDataTypeError(Exception):
@@ -52,8 +54,8 @@ class Person:
 
     def setPhoneNo(self, phoneNo):
         try:
-            if type(phoneNo) == int:
-                self.__phoneNo = int(phoneNo)
+            if type(phoneNo) == str:
+                self.__phoneNo = str(phoneNo)
             else:
                 raise(IncorrectDataTypeError(phoneNo))
         except IncorrectDataTypeError:
@@ -84,7 +86,7 @@ class Student(Person):
 
     def paySubscriptionFees(self,fees):
         try:
-            if type(fees) == float:
+            if type(fees) == int:
                 self.amount = self.amount + fees
                 return self.amount
             else:
@@ -102,7 +104,7 @@ class Student(Person):
 
     def updateStatus(self, status):
         try:
-            if status in ["Present", "Alumni"]:
+            if status in ["Present Student", "Alumni"]:
                 self.__status = status
             else:
                 raise(UpdateStatusError(status))
