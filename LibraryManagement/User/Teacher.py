@@ -1,9 +1,23 @@
 
+class InvalidInput(Exception):
+    def __init__(self, input):
+        print("Error :", input, "is not a valid input")
+
+class UpdateStatusError(Exception):
+    def __init__(self, status):
+        print("Error", status, "Invalid options entered entered")
+
+
+class IncorrectDataTypeError(Exception):
+    def __init__(self, input):
+        print("Error :",input, "has data type:", type(input).__name__)
+
+
 class Person:
 
-    def __init__(self,name,address,phoneNo,email,gender):
+    def __init__(self, name, address, phoneNo, email, gender):
         self.__name = name
-        self.__address =address
+        self.__address = address
         self.__phoneNo = phoneNo
         self.__email = email
         self.__gender = gender
@@ -23,23 +37,36 @@ class Person:
     def getAddress(self):
         return self.__address
 
-    def setName(self,name):
+    def setName(self, name):
         self.__name = name
 
-    def setGender(self,gender):
-        self.__gender = gender
+    def setGender(self, gender):
+        try:
+            if gender in ["M", "F"]:
+                self.__gender = gender
+            else:
+                raise (UpdateStatusError(gender))
+        except UpdateStatusError:
+            print("Please enter either M or F")
 
-    def setPhoneNo(self,phoneNo):
-        self.__phoneNo = phoneNo
+    def setPhoneNo(self, phoneNo):
+        try:
+            if type(phoneNo) == int:
+                self.__phoneNo = int(phoneNo)
+            else:
+                raise (IncorrectDataTypeError(phoneNo))
+        except IncorrectDataTypeError:
+            print("Please enter correct phone number")
 
-    def setEmail(self,email):
+    def setEmail(self, email):
         self.__email = email
 
-    def setAddress(self,address):
+    def setAddress(self, address):
         self.__address = address
 
     def display(self):
-        return ("Name",self.__name,"Address",self.__address,"Email",self.__email,"PhoneNumber",self.__phoneNo,"Gender",self.__gender)
+        return ("Name", self.__name, "Address", self.__address, "Email", self.__email, "Gender", self.__gender, "PhoneNumber",self.__phoneNo)
+
 
 class Teacher(Person):
 
@@ -53,8 +80,16 @@ class Teacher(Person):
         self.__subjects =  []
 
     def subscriptionFees(self,fees):
-        self.__salary-= fees
+        try:
+            if type(fees) == float:
+                self.__salary-= fees
+                return self.__salary
+            else:
+                raise(IncorrectDataTypeError(fees))
+        except IncorrectDataTypeError:
+            print("you have entered incorrect Amount in fees")
 
+        
     def updateResearchAreas(self,research):
         self.__researchAreas.append(research)
         return self.__researchAreas
