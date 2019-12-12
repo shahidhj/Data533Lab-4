@@ -14,8 +14,20 @@ class TestLiterature(unittest.TestCase):
         self.book2 = lit.Book("Ultimate CheatBook", "Zach", "Technology", 59.99, 100, 1010110101, 2019, 2)
         self.periodical1 = lit.Periodical("Athlon Sports", "John Coon", "Sports", 14.99, 10110110, 2019_04, 5)
         self.periodical2 = lit.Periodical("Chop Chop", "Sally Sampson", "Cookery", 10.99, 10111110, 2019_11, 1)
-
-    
+        # wrongly created instances
+        self.book3 = lit.Book("Data Science Book", "Alex", "Science", 99.99, 181, 1100110101, 2016, -8)
+        self.book4 = lit.Book("Ultimate CheatBook", "Zach", "Technology", 59.99, 100, 1010110101, 2019, "a")
+        self.periodical3 = lit.Periodical("Athlon Sports", "John Coon", "Sports", 14.99, 10110110, 2019_04, 0)
+        self.periodical4 = lit.Periodical("Chop Chop", "Sally Sampson", "Cookery", 10.99, 10111110, 2019_11, 3.2)
+        
+        
+    def test_validate(self):
+        self.assertIsNone(self.book3.validate_object())
+        self.assertIsNone(self.book4.validate_object())
+        self.assertIsNone(self.periodical3.validate_object())
+        self.assertIsNone(self.periodical4.validate_object())
+        
+        
     def test_issued(self):
         self.book1.issued()
         self.book2.issued()
@@ -71,11 +83,11 @@ class TestLiterature(unittest.TestCase):
     def test_update_status(self):
         self.book1.update_status("Yes")
         self.assertEqual(self.book1.availability,"Yes")
-        self.assertEqual(self.book1.update_status("discontinue"),"Enter valid status")
+        self.assertEqual(self.book1.update_status("discontinue"),"Book Status Not Updated")
         
         self.periodical1.update_status("Yes")
         self.assertEqual(self.periodical2.availability,"Yes")
-        self.assertEqual(self.periodical2.update_status("discontinue"),"Enter valid status")
+        self.assertEqual(self.periodical2.update_status("discontinue"),"Periodical Status Not Updated")
         
     def test_display_details(self):
         self.assertEqual(self.book1.display_details(), "Title:Data Science Book    Author:Alex    Book Title:Data Science Book    Book Author:Alex    Book Genre:Science    Book Year:2016    Number of Pages:181    Copies Available:8")
